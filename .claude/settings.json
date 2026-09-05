@@ -1,40 +1,44 @@
 {
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git log --oneline -5"
+          }
+        ]
+      }
+    ]
+  },
   "alwaysThinkingEnabled": true,
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": ["nixos"],
   "permissions": {
     "allow": [
-      "Bash(git add:*)",
-      "Bash(git add .:*)",
-      "Bash(git status:*)",
-      "Bash(git log:*)",
-      "Bash(git show:*)",
-      "Bash(git diff:*)",
-      "Bash(cd:*)",
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(mise *)",
+      "Bash(which *)",
+      "Bash(type *)",
+      "Bash(tree *)",
       "Bash(ls:*)",
-      "Bash(ls -la:*)",
-      "Bash(ls -l:*)",
-      "Bash(ls -a:*)",
       "Bash(cat:*)",
-      "Bash(tree:*)",
-      "Bash(tree -L:*)",
-      "Bash(find:*)",
       "Bash(grep:*)",
-      "Bash(grep -r:*)",
-      "Bash(grep -i:*)",
-      "Bash(grep -n:*)",
-      "Bash(which:*)",
-      "Bash(type:*)",
-      "Bash(source ~/.zshrc)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:nixos.wiki)",
-      "mcp__nixos",
+      "Bash(find:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(curl *)",
+      "WebFetch",
       "WebSearch",
-      "Write(*.md)",
-      "Write(**/*.md)",
+      "Write",
       "Skill"
     ],
-    "deny": [],
-    "ask": []
+    "deny": []
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$CLAUDE_PROJECT_DIR/.claude/statusline.sh"
   }
 }
