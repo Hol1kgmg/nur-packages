@@ -15,6 +15,8 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   example-package = pkgs.callPackage ./pkgs/example-package { };
+  herdr = pkgs.callPackage ./pkgs/herdr { };
+  yaskkserv2 = pkgs.callPackage ./pkgs/yaskkserv2 { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
 }
