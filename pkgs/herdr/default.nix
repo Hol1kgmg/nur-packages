@@ -21,7 +21,11 @@ let
     hash = "sha256-SUYF4bbaYwNgoe498VoCUzuLPcjBLQXR0o0DWjjoSnI=";
   };
 
-  zigDeps = callPackage "${src}/vendor/libghostty-vt/build.zig.zon.nix" {
+  # upstream の vendor/libghostty-vt/build.zig.zon.nix をここに取り込んである。
+  # "${src}/..." を callPackage すると IFD になり、nix-env -qa の読み取り専用の
+  # 評価ストアでは src の .drv を書けずに落ちる（NUR の評価器も IFD を通さない）。
+  # version を上げるときは update.sh がこのファイルも取り直す
+  zigDeps = callPackage ./build.zig.zon.nix {
     name = "herdr-libghostty-vt-zig-cache";
     inherit zstd;
     linkFarm =

@@ -27,13 +27,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - pkg: herdr
-            repo: ogulcancelik/herdr
           - pkg: yaskkserv2
             repo: wachikun/yaskkserv2
           - pkg: spec-kit
             repo: github/spec-kit
           # update.sh を持つパッケージは repo を見ない
+          - pkg: herdr
           - pkg: markserv
           - pkg: openscreen-for-mac
     runs-on: ubuntu-latest

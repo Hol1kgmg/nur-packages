@@ -26,6 +26,13 @@ Dependabot に Nix の ecosystem は無いため、`.github/dependabot.yml` が�
 
 - `openscreen-for-mac` — GitHub Releases の .dmg を2つ pin している
 - `markserv` — upstream に git tag が無く、npm の tarball が source。`package-lock.json` も vendor している
+- `herdr` — version 自体は `just bump` で上がるが、vendor した `build.zig.zon.nix` を取り直す必要がある
+
+## herdr の build.zig.zon.nix
+
+upstream の `vendor/libghostty-vt/build.zig.zon.nix` をこのリポジトリに取り込んである。`callPackage "${src}/vendor/..."` と書くと IFD になり、`build.yml` の `nix-env -qa`（読み取り専用の評価ストア）が src の `.drv` を書けずに落ちる。NUR の評価器も IFD を通さない。
+
+取り込んだファイルは version と対で意味を持つので、`update.sh` が `just bump` の後に同じ tag から取り直し、zon2nix の生成物であることを確認している。
 
 ## 1. GitHub App
 
