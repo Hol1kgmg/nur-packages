@@ -43,9 +43,10 @@ rustPlatform.buildRustPackage {
   version = "0.9.0";
   inherit src;
 
-  cargoLock = {
-    lockFile = "${src}/Cargo.lock";
-  };
+  # "${src}/Cargo.lock" を cargoLock に渡すと、評価時に src を読むため IFD になる。
+  # nix-env -qa（読み取り専用の評価ストア）と NUR の評価器がそこで落ちる。
+  # vendor 済みの hash を置けば評価は src に触らない。更新は just fix-hashes herdr
+  cargoHash = "sha256-CW/SF/cAPDv47gS5B7XbVZEE6LC9F1a2I1TLTJ4AWdw=";
 
   nativeBuildInputs =
     [

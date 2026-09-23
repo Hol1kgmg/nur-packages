@@ -34,6 +34,10 @@ upstream の `vendor/libghostty-vt/build.zig.zon.nix` をこのリポジトリ�
 
 取り込んだファイルは version と対で意味を持つので、`update.sh` が `just bump` の後に同じ tag から取り直し、zon2nix の生成物であることを確認している。
 
+同じ理由で `cargoLock.lockFile = "${src}/Cargo.lock"` も使えない（評価時に src を読むため IFD になる）。`cargoHash` を置いてあり、version を上げた後は `just fix-hashes herdr` が解決する。
+
+IFD が残っていないかは、評価チェックを `--option allow-import-from-derivation false` で回せば確認できる。ストアに実体化済みの derivation があると `true` のままでは見逃すことがある。
+
 ## 1. GitHub App
 
 権限は `Contents: Read and write` と `Pull requests: Read and write` のみ。このリポジトリにインストールし、`APP_ID` と `APP_PRIVATE_KEY` を Secrets に登録する。
