@@ -46,9 +46,9 @@ IFD が残っていないかは、評価チェックを `--option allow-import-f
 
 ## 2. ブランチ保護
 
-main を保護し、必須チェックに `build.yml` のジョブを指定する。リポジトリ設定で auto-merge を有効化する。
+main を保護し、必須チェックに `build.yml` の `check` ジョブを指定する。リポジトリ設定で auto-merge を有効化する。
 
-設定しないと `--auto` は待つ相手が無く即マージになり、更新が検証を経ずに通る。`build.yml` の `tests` は matrix なので、チェック名は `tests (<nurRepo>, <cachixName>, <nixPath>)` の形で並ぶ。
+設定しないと `--auto` は待つ相手が無く即マージになり、更新が検証を経ずに通る。`tests` は matrix でチェック名が変わるため直接指定しない。matrix から要素を外すと、その名前の必須チェックが永久に pending になり auto-merge が止まる。
 
 ## 既知の弱点
 

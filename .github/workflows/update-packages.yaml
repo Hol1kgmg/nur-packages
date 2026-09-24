@@ -126,6 +126,8 @@ jobs:
           # パッケージごとの固定ブランチ。マージされずに残っても PR の本数は増えない
           branch: update-${{ matrix.pkg }}
           delete-branch: true
+          # workflow_dispatch を別ブランチから起動しても main へ向ける
+          base: main
 
       # ブランチ保護を迂回しない。build.yml のビルドが通って初めてマージされる。
       # openscreen-for-mac は ubuntu の CI が検証にならないため手動で見る

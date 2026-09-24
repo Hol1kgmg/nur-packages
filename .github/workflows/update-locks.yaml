@@ -37,6 +37,8 @@ jobs:
           commit-message: "chore: flake.lock を更新"
           branch: update-locks
           delete-branch: true
+          # workflow_dispatch を別ブランチから起動しても main へ向ける
+          base: main
 
       # ブランチ保護を迂回しない。build.yml のビルドが通って初めてマージされる
       - if: steps.pr.outputs.pull-request-number != ''

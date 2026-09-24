@@ -39,18 +39,23 @@ if [[ "$(printf '%s\n%s\n' "$old_version" "$version" | sort -V | tail -1)" == "$
   exit 0
 fi
 
-(cd "$root" && just bump herdr "$version")
-
+# default.nix を書き換える前に vendoring を済ませる。取得に失敗しても
+# version と build.zig.zon.nix が食い違った状態を残さない
 echo "==> vendoring build.zig.zon.nix from v$version"
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
 curl -fsSL \
   ${token:+-H "Authorization: Bearer $token"} \
   "https://raw.githubusercontent.com/$repo/v$version/vendor/libghostty-vt/build.zig.zon.nix" \
-  -o "$dir/build.zig.zon.nix"
+  -o "$tmp"
 
 # zon2nix の生成物。取り違えたら以降のビルドが謎の失敗をするので、ここで弾く
-grep -q 'zon2nix' "$dir/build.zig.zon.nix" || {
+grep -q 'zon2nix' "$tmp" || {
   echo "fetched build.zig.zon.nix does not look like a zon2nix output" >&2
   exit 1
 }
+
+(cd "$root" && just bump herdr "$version")
+mv "$tmp" "$dir/build.zig.zon.nix"
 
 git --no-pager diff --stat -- "$dir" || true
