@@ -15,11 +15,15 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   example-package = pkgs.callPackage ./pkgs/example-package { };
-  herdr = pkgs.callPackage ./pkgs/herdr { };
   markserv = pkgs.callPackage ./pkgs/markserv { };
   openscreen-for-mac = pkgs.callPackage ./pkgs/openscreen-for-mac { };
   spec-kit = pkgs.callPackage ./pkgs/spec-kit { };
   yaskkserv2 = pkgs.callPackage ./pkgs/yaskkserv2 { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
+}
+# herdr は zig_0_15 を要る。安定チャネル（nixos-25.05）にはまだ無いので、
+# そこでは attribute ごと出さない。出すと評価が callPackage で abort する
+// pkgs.lib.optionalAttrs (pkgs ? zig_0_15) {
+  herdr = pkgs.callPackage ./pkgs/herdr { };
 }

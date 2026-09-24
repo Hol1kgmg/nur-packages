@@ -14,6 +14,9 @@ on:
 jobs:
   tests:
     strategy:
+      # 1レグが落ちても残りの結果は見たい。どのチャネルで壊れたかが分からないと
+      # 原因の切り分けに往復が増える
+      fail-fast: false
       matrix:
         # Set this to notify the global nur package registry that changes are
         # available.
