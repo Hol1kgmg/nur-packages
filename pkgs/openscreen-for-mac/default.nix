@@ -6,7 +6,7 @@
 }:
 
 let
-  version = "1.11.0";
+  version = "1.12.2";
 
   # Upstream ships prebuilt, Developer ID-signed and notarized .dmg images for
   # macOS only; the project's own flake covers Linux. Building from source here
@@ -15,11 +15,11 @@ let
   sources = {
     aarch64-darwin = {
       url = "https://github.com/getopenscreen/openscreen/releases/download/v${version}/Openscreen-macOS-Apple-Silicon-${version}.dmg";
-      hash = "sha256-hv/QDHiSydyvHTK4hqMl/aIcelE9QXwFenQeZYjtsEg=";
+      hash = "sha256-H7v5Iq14wJ7lLZd8NmaQ53kKKhE1crrDibgl+sVKF2Y=";
     };
     x86_64-darwin = {
       url = "https://github.com/getopenscreen/openscreen/releases/download/v${version}/Openscreen-macOS-Intel-${version}.dmg";
-      hash = "sha256-SFUFbDA6qvoW7+o263+CPT5hSPqyLNfFD0sykaoH/Q0=";
+      hash = "sha256-aIZGWKXYRWV5bgJzratn/h7qI9VCwUo9b7JGYDGGpUs=";
     };
   };
 
